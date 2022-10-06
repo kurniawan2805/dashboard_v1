@@ -16,6 +16,7 @@
     "@emotion/styled": "latest",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
+    "@mui/x-data-grid": "^5.17.5",
     "@next/swc-linux-x64-gnu": "^12.3.1",
     "@next/swc-linux-x64-musl": "^12.3.1",
     "@supabase/supabase-js": "^1.35.7",

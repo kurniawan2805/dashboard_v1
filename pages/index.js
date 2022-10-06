@@ -10,7 +10,7 @@ import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -19,6 +19,8 @@ import { supabase } from '../utils/supabaseClient';
 
 import Outstanding from '../src/components/Outstanding';
 import Copyright from '../src/components/Copyright';
+import Link from '../src/Link'
+
 
 export async function getStaticProps() {
   const { data: outstanding, error } = await supabase
@@ -71,8 +73,16 @@ export default function Index({ outstanding }) {
           </Grid>  */}
           {/* Recent Orders */}
           <Grid item xs={12}>
-            <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+            <Paper sx={{ p: 0, display: 'flex', flexDirection: 'column', height: 420 }}>
               <Outstanding outstanding={outstanding} />
+              <Link
+                color="primary"
+                href="/offhire"
+                // onClick={(e) => e.preventDefault}
+                sx={{ mt: 3 }}
+              >
+                See more details
+              </Link>
             </Paper>
           </Grid>
         </Grid>
