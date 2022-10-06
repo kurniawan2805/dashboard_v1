@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import MuiAppBar from '@mui/material/AppBar';
@@ -17,10 +15,30 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 
+import { supabase } from '../utils/supabaseClient';
+
 import Outstanding from '../src/components/Outstanding';
 import Copyright from '../src/components/Copyright';
 
-export default function Index() {
+export async function getStaticProps() {
+  const { data: outstanding, error } = await supabase
+    .from('offhire_db')
+    .select('*')
+    .is('submit_date', null);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return {
+    props: {
+      outstanding,
+    },
+  };
+}
+
+export default function Index({ outstanding }) {
+  console.log(outstanding);
   return (
     <Box sx={{ display: 'flex' }}>
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -54,7 +72,7 @@ export default function Index() {
           {/* Recent Orders */}
           <Grid item xs={12}>
             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-              <Outstanding />
+              <Outstanding outstanding={outstanding} />
             </Paper>
           </Grid>
         </Grid>
